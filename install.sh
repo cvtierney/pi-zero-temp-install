@@ -16,7 +16,7 @@ sudo apt install -y python3 python3-pip python3-flask
 
 echo "=== Creating temperature sensor API script ==="
 
-cat << 'EOF' | sudo tee /home/pi/tempsensor.py > /dev/null
+cat << 'EOF' | sudo tee /home/chris/tempsensor.py > /dev/null
 import os
 from flask import Flask, jsonify
 
@@ -67,8 +67,8 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 EOF
 
-sudo chmod +x /home/pi/tempsensor.py
-sudo chown pi:pi /home/pi/tempsensor.py
+sudo chmod +x /home/chris/tempsensor.py
+sudo chown chris:chris /home/chris/tempsensor.py
 
 echo "=== Creating systemd service ==="
 
@@ -78,10 +78,10 @@ Description=Temperature Sensor Web API
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 /home/pi/tempsensor.py
-WorkingDirectory=/home/pi
+ExecStart=/usr/bin/python3 /home/chris/tempsensor.py
+WorkingDirectory=/home/chris
 Restart=always
-User=pi
+User=chris
 
 [Install]
 WantedBy=multi-user.target
